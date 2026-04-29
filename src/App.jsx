@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import OwnerLogin from "./components/OwnerLogin";
+import OwnerDock from "./components/OwnerDock";
 import Process from "./components/Process";
 import Projects from "./components/Projects";
 import Services from "./components/Services";
@@ -187,7 +188,9 @@ function App() {
 
   return (
     <main className="portfolio" data-theme={theme}>
-      <Header
+      <Header />
+
+      <OwnerDock
         adminPanelOpen={adminPanelOpen}
         isAdmin={isAdmin}
         onAdminLock={handleAdminLock}

@@ -104,12 +104,25 @@
   color: #ffffff;
 }
 
-.owner-controls {
+.owner-dock {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 40;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   gap: 10px;
-  min-width: 116px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px;
+  background: rgba(7, 11, 20, 0.82);
+  box-shadow: 0 18px 55px rgba(2, 6, 23, 0.38);
+  backdrop-filter: blur(18px);
+}
+
+.portfolio[data-theme="light"] .owner-dock {
+  background: rgba(248, 251, 255, 0.88);
 }
 
 .theme-toggle {
@@ -1330,10 +1343,6 @@ textarea:focus {
     flex-basis: 100%;
   }
 
-  .owner-controls {
-    margin-left: auto;
-  }
-
   .hero,
   .two-column,
   .featured-project {
@@ -1430,10 +1439,6 @@ textarea:focus {
     gap: 2px;
   }
 
-  .owner-controls {
-    align-self: center;
-  }
-
   .nav-links a {
     padding: 8px 9px;
     font-size: 0.86rem;
@@ -1468,6 +1473,14 @@ textarea:focus {
   .theme-toggle {
     width: 36px;
     height: 36px;
+  }
+
+  .owner-dock {
+    right: 12px;
+    bottom: 12px;
+    max-width: calc(100% - 24px);
+    overflow-x: auto;
+    padding: 8px;
   }
 
   .service-detail-panel {
