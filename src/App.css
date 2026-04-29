@@ -115,7 +115,7 @@
   gap: 10px;
   border: 1px solid var(--line);
   border-radius: 12px;
-  padding: 10px;
+  padding: 8px;
   background: rgba(7, 11, 20, 0.82);
   box-shadow: 0 18px 55px rgba(2, 6, 23, 0.38);
   backdrop-filter: blur(18px);
@@ -1480,7 +1480,7 @@ textarea:focus {
     bottom: 12px;
     max-width: calc(100% - 24px);
     overflow-x: auto;
-    padding: 8px;
+    padding: 6px;
   }
 
   .service-detail-panel {

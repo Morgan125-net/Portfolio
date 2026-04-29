@@ -1,4 +1,4 @@
-function Header() {
+function Header({ onThemeToggle, theme }) {
   return (
     <header className="site-header">
       <a className="brand" href="#home" aria-label="Morgan Muraya home">
@@ -12,6 +12,15 @@ function Header() {
         <a href="#projects">Projects</a>
         <a href="#contact">Contact</a>
       </nav>
+
+      <button
+        className="theme-toggle"
+        type="button"
+        onClick={onThemeToggle}
+        aria-label={`Switch to ${theme === "dark" ? "bright" : "dark"} mode`}
+      >
+        <span className={`theme-icon ${theme}`} aria-hidden="true" />
+      </button>
     </header>
   );
 }

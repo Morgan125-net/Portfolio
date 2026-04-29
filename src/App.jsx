@@ -188,15 +188,13 @@ function App() {
 
   return (
     <main className="portfolio" data-theme={theme}>
-      <Header />
+      <Header onThemeToggle={toggleTheme} theme={theme} />
 
       <OwnerDock
         adminPanelOpen={adminPanelOpen}
         isAdmin={isAdmin}
         onAdminLock={handleAdminLock}
         onAdminPanelToggle={() => setAdminPanelOpen(!adminPanelOpen)}
-        onThemeToggle={toggleTheme}
-        theme={theme}
       />
 
       {adminPanelOpen && !isAdmin && (
