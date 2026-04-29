@@ -137,19 +137,25 @@
 }
 
 .portfolio[data-theme="light"] .theme-toggle {
-  background: #e8f4ff;
+  background: #f8fbff;
 }
 
-.theme-gear {
+.theme-symbol {
+  display: block;
+  line-height: 1;
+}
+
+.theme-symbol.gear {
   color: #38bdf8;
   font-size: 1.35rem;
-  line-height: 1;
   text-shadow: 0 0 14px rgba(56, 189, 248, 0.42);
 }
 
-.portfolio[data-theme="light"] .theme-gear {
-  color: #0369a1;
+.theme-symbol.moon {
+  color: #0f2a44;
+  font-size: 1.3rem;
   text-shadow: none;
+  transform: translateY(-1px);
 }
 
 .owner-button {

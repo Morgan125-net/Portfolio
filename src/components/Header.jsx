@@ -19,7 +19,12 @@ function Header({ onThemeToggle, theme }) {
         onClick={onThemeToggle}
         aria-label={`Switch to ${theme === "dark" ? "bright" : "dark"} mode`}
       >
-        <span className="theme-gear" aria-hidden="true">⚙</span>
+        <span
+          className={`theme-symbol ${theme === "dark" ? "gear" : "moon"}`}
+          aria-hidden="true"
+        >
+          {theme === "dark" ? "⚙" : "☾"}
+        </span>
       </button>
     </header>
   );
