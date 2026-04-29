@@ -133,39 +133,23 @@
   border: 1px solid var(--line);
   border-radius: 8px;
   cursor: pointer;
-  background: rgba(15, 23, 42, 0.74);
+  background: #061729;
 }
 
 .portfolio[data-theme="light"] .theme-toggle {
-  background: rgba(255, 255, 255, 0.78);
+  background: #e8f4ff;
 }
 
-.theme-icon {
-  position: relative;
-  display: block;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
+.theme-gear {
+  color: #38bdf8;
+  font-size: 1.35rem;
+  line-height: 1;
+  text-shadow: 0 0 14px rgba(56, 189, 248, 0.42);
 }
 
-.theme-icon.dark {
-  background: #fde68a;
-  box-shadow: 0 0 18px rgba(253, 230, 138, 0.55);
-}
-
-.theme-icon.light {
-  background: #0f2a44;
-}
-
-.theme-icon.light::after {
-  content: "";
-  position: absolute;
-  top: -2px;
-  right: -2px;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #f8fbff;
+.portfolio[data-theme="light"] .theme-gear {
+  color: #0369a1;
+  text-shadow: none;
 }
 
 .owner-button {
