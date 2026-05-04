@@ -155,12 +155,12 @@ export const starterProjects = [
     title: "Hospital Appointment Booking & Reminder System",
     category: "Full-stack healthcare system",
     summary:
-      "A booking system concept for patients and staff, covering appointment requests, reference IDs, rescheduling, and reminder workflows.",
+      "A patient-facing booking flow and staff dashboard concept for handling appointment requests, reference IDs, rescheduling, and reminder workflows.",
     role: "Full-stack developer",
     problem:
-      "Appointment handling can become slow and unclear when patients and staff rely on manual follow-up.",
+      "Patients and staff need a clearer way to book, track, cancel, and reschedule appointments without relying on scattered manual follow-up.",
     impact:
-      "Creates a clearer path for booking, tracking, and managing appointments from one place.",
+      "Shows how appointment records, patient communication, and staff review could live in one cleaner workflow.",
     tags: ["React", "Node.js", "Express", "MongoDB", "Twilio SMS"],
     features: [
       "Patient booking with reference IDs",
@@ -170,18 +170,22 @@ export const starterProjects = [
       "Responsive frontend and API-driven backend",
     ],
     image: "",
+    imageUrl: "/projects/hospital-booking.svg",
+    liveUrl: "",
+    sourceUrl: "",
+    caseStudyUrl: "",
   },
   {
     id: "documentation-workflow",
     title: "Technical Documentation Workflow",
     category: "Writing and documentation",
     summary:
-      "A writing workflow for turning rough project information into proposals, reports, guides, and system documentation.",
+      "A documentation workflow for turning rough project notes into proposals, reports, guides, and system handover material.",
     role: "Technical writer",
     problem:
-      "Project documents often begin as scattered notes, which makes them difficult to present, review, or maintain.",
+      "Project documents often start as scattered notes, screenshots, and requirements, which makes them difficult to review or reuse.",
     impact:
-      "Makes technical information easier to review, present, and use after delivery.",
+      "Gives clients or teams a cleaner document structure they can present, maintain, and continue using after delivery.",
     tags: ["Reports", "Guides", "Research", "User documentation"],
     features: [
       "Clean document structure",
@@ -190,6 +194,10 @@ export const starterProjects = [
       "Professional formatting and review flow",
     ],
     image: "",
+    imageUrl: "/projects/documentation-workflow.svg",
+    liveUrl: "",
+    sourceUrl: "",
+    caseStudyUrl: "",
   },
 ];
 
@@ -203,4 +211,8 @@ export const emptyProject = {
   tags: "",
   features: "",
   image: "",
+  imageUrl: "",
+  liveUrl: "",
+  sourceUrl: "",
+  caseStudyUrl: "",
 };

@@ -11,6 +11,7 @@ import Process from "./components/Process";
 import Projects from "./components/Projects";
 import Services from "./components/Services";
 import Skills from "./components/Skills";
+import defaultProfilePhoto from "./assets/profile.jpg";
 import {
   ADMIN_PIN,
   credibilityPoints,
@@ -41,6 +42,7 @@ function App() {
   );
   const [profileMessage, setProfileMessage] = useState("");
   const [projects, setProjects] = useState(readStoredProjects);
+  const [projectMessage, setProjectMessage] = useState("");
   const [managerOpen, setManagerOpen] = useState(false);
   const [editingProjectId, setEditingProjectId] = useState("");
   const [draft, setDraft] = useState(emptyProject);
@@ -95,6 +97,7 @@ function App() {
 
   function handleDraftChange(event) {
     const { name, value } = event.target;
+    setProjectMessage("");
     setDraft((current) => ({ ...current, [name]: value }));
   }
 
@@ -106,14 +109,17 @@ function App() {
     try {
       const image = await compressImage(file, 1400, 0.8);
       setDraft((current) => ({ ...current, image }));
+      setProjectMessage("Project image preview added. Save the project to keep it in this browser.");
       event.target.value = "";
-    } catch {
+    } catch (error) {
       setDraft((current) => ({ ...current, image: "" }));
+      setProjectMessage(error.message || "That project image could not be added.");
     }
   }
 
   function handleRemoveProjectImage() {
     setDraft((current) => ({ ...current, image: "" }));
+    setProjectMessage("Project image preview removed.");
   }
 
   function handleSubmitProject(event) {
@@ -131,6 +137,10 @@ function App() {
       tags: splitList(draft.tags),
       features: splitList(draft.features, "\n"),
       image: draft.image,
+      imageUrl: draft.imageUrl.trim(),
+      liveUrl: draft.liveUrl.trim(),
+      sourceUrl: draft.sourceUrl.trim(),
+      caseStudyUrl: draft.caseStudyUrl.trim(),
     };
 
     if (editingProjectId) {
@@ -139,16 +149,21 @@ function App() {
           project.id === editingProjectId ? { ...project, ...projectDetails } : project,
         ),
       );
+      setProjectMessage("Project updated.");
     } else {
       updateProjects([{ id: crypto.randomUUID(), ...projectDetails }, ...projects]);
+      setProjectMessage("Project added.");
     }
 
-    handleCancelEdit();
+    setDraft(emptyProject);
+    setEditingProjectId("");
+    setManagerOpen(false);
   }
 
   function handleEditProject(project) {
     setDraft(projectToDraft(project));
     setEditingProjectId(project.id);
+    setProjectMessage("");
     setManagerOpen(true);
     requestAnimationFrame(() => {
       document.getElementById("projects")?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -159,6 +174,7 @@ function App() {
     setDraft(emptyProject);
     setEditingProjectId("");
     setManagerOpen(false);
+    setProjectMessage("");
   }
 
   function handleRemoveProject(projectId) {
@@ -166,12 +182,15 @@ function App() {
 
     if (editingProjectId === projectId) {
       handleCancelEdit();
+    } else {
+      setProjectMessage("Project removed.");
     }
   }
 
   function handleResetProjects() {
     updateProjects(starterProjects);
     handleCancelEdit();
+    setProjectMessage("Example projects restored.");
   }
 
   function handleAdminUnlock(event) {
@@ -225,11 +244,12 @@ function App() {
 
       <Hero
         credibilityPoints={credibilityPoints}
+        hasCustomProfilePhoto={Boolean(profilePhoto)}
         isAdmin={isAdmin}
         onClearProfilePhoto={handleClearProfilePhoto}
         onProfileUpload={handleProfileUpload}
         profileMessage={profileMessage}
-        profilePhoto={profilePhoto}
+        profilePhoto={profilePhoto || defaultProfilePhoto}
       />
       <About />
       <Services
@@ -252,6 +272,7 @@ function App() {
         onEditProject={handleEditProject}
         onImageChange={handleProjectImage}
         onManagerToggle={handleManagerToggle}
+        projectMessage={projectMessage}
         onRemoveImage={handleRemoveProjectImage}
         onRemoveProject={handleRemoveProject}
         onResetProjects={handleResetProjects}

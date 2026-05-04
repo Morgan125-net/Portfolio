@@ -108,8 +108,48 @@ function ProjectForm({
         </label>
 
         <label>
-          Project image
+          Permanent image path or URL
+          <input
+            name="imageUrl"
+            value={draft.imageUrl}
+            onChange={onChange}
+            placeholder="/projects/project-screenshot.jpg or https://..."
+          />
+        </label>
+
+        <label>
+          Quick image upload
           <input type="file" accept="image/*" onChange={onImageChange} />
+        </label>
+
+        <label>
+          Live demo link
+          <input
+            name="liveUrl"
+            value={draft.liveUrl}
+            onChange={onChange}
+            placeholder="https://example.com"
+          />
+        </label>
+
+        <label>
+          Source code link
+          <input
+            name="sourceUrl"
+            value={draft.sourceUrl}
+            onChange={onChange}
+            placeholder="https://github.com/..."
+          />
+        </label>
+
+        <label className="full-field">
+          Case study or write-up link
+          <input
+            name="caseStudyUrl"
+            value={draft.caseStudyUrl}
+            onChange={onChange}
+            placeholder="https://... or /case-studies/project-name"
+          />
         </label>
 
         <label className="full-field">
@@ -133,7 +173,6 @@ function ProjectForm({
           </button>
         </div>
       )}
-
       <div className="form-actions">
         <button className="button button-primary" type="submit">
           {editingProjectId ? "Save Changes" : "Save Project"}
@@ -152,6 +191,26 @@ function OwnerProjectActions({ label = "project", onEdit, onRemove }) {
       <button className="text-button danger" type="button" onClick={onRemove}>
         Remove {label}
       </button>
+    </div>
+  );
+}
+
+function ProjectLinks({ project }) {
+  const links = [
+    { href: project.liveUrl, label: "Live demo" },
+    { href: project.sourceUrl, label: "Source" },
+    { href: project.caseStudyUrl, label: "Case study" },
+  ].filter((link) => link.href);
+
+  if (!links.length) return null;
+
+  return (
+    <div className="project-links" aria-label={`${project.title} links`}>
+      {links.map((link) => (
+        <a href={link.href} key={link.label} rel="noreferrer" target="_blank">
+          {link.label}
+        </a>
+      ))}
     </div>
   );
 }
@@ -195,6 +254,8 @@ function FeaturedProject({ isAdmin, onEdit, onRemove, project }) {
           ))}
         </ul>
 
+        <ProjectLinks project={project} />
+
         {isAdmin && (
           <OwnerProjectActions
             label="featured project"
@@ -224,6 +285,7 @@ function ProjectCard({ isAdmin, onEdit, onRemove, project }) {
             <span key={tag}>{tag}</span>
           ))}
         </div>
+        <ProjectLinks project={project} />
         {isAdmin && (
           <OwnerProjectActions
             onEdit={() => onEdit(project)}
@@ -246,6 +308,7 @@ function Projects({
   onEditProject,
   onImageChange,
   onManagerToggle,
+  projectMessage,
   onRemoveImage,
   onRemoveProject,
   onResetProjects,
@@ -267,8 +330,10 @@ function Projects({
           >
             {managerOpen ? "Close Manager" : "Add Project"}
           </button>
-        )}
+      )}
       </div>
+
+      {isAdmin && projectMessage && <p className="project-message">{projectMessage}</p>}
 
       {isAdmin && managerOpen && (
         <ProjectForm

@@ -1,6 +1,8 @@
 function ProjectVisual({ project }) {
-  if (project.image) {
-    return <img src={project.image} alt={`${project.title} project preview`} />;
+  const imageSource = project.image || project.imageUrl;
+
+  if (imageSource) {
+    return <img src={imageSource} alt={`${project.title} project preview`} />;
   }
 
   return (

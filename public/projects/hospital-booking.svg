@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Hospital appointment booking dashboard preview</title>
+  <desc id="desc">A healthcare booking dashboard with appointment cards, patient details, and schedule metrics.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#0f766e"/>
+      <stop offset="0.55" stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f8fafc" stop-opacity="0.96"/>
+      <stop offset="1" stop-color="#dbeafe" stop-opacity="0.9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="760" fill="url(#bg)"/>
+  <circle cx="1010" cy="130" r="210" fill="#38bdf8" opacity="0.2"/>
+  <circle cx="170" cy="640" r="260" fill="#34d399" opacity="0.18"/>
+  <rect x="92" y="78" width="1016" height="604" rx="34" fill="#f8fafc" opacity="0.96"/>
+  <rect x="92" y="78" width="1016" height="76" rx="34" fill="#0f172a"/>
+  <circle cx="145" cy="116" r="11" fill="#f87171"/>
+  <circle cx="181" cy="116" r="11" fill="#fbbf24"/>
+  <circle cx="217" cy="116" r="11" fill="#34d399"/>
+  <text x="270" y="125" fill="#e0f2fe" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="800">Appointment Booking System</text>
+  <rect x="132" y="194" width="250" height="428" rx="22" fill="#e0f2fe"/>
+  <text x="164" y="250" fill="#0f172a" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="900">Today</text>
+  <text x="164" y="288" fill="#2563eb" font-family="Inter, Arial, sans-serif" font-size="56" font-weight="900">18</text>
+  <text x="164" y="324" fill="#475569" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="700">appointments</text>
+  <rect x="164" y="372" width="174" height="16" rx="8" fill="#38bdf8"/>
+  <rect x="164" y="414" width="128" height="16" rx="8" fill="#34d399"/>
+  <rect x="164" y="456" width="156" height="16" rx="8" fill="#818cf8"/>
+  <rect x="420" y="194" width="298" height="188" rx="22" fill="url(#card)"/>
+  <text x="452" y="248" fill="#0f172a" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="900">Patient request</text>
+  <rect x="452" y="286" width="198" height="14" rx="7" fill="#94a3b8"/>
+  <rect x="452" y="320" width="132" height="14" rx="7" fill="#cbd5e1"/>
+  <rect x="452" y="342" width="96" height="28" rx="14" fill="#bbf7d0"/>
+  <rect x="746" y="194" width="322" height="188" rx="22" fill="url(#card)"/>
+  <text x="778" y="248" fill="#0f172a" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="900">Reference ID</text>
+  <text x="778" y="312" fill="#0369a1" font-family="Inter, Arial, sans-serif" font-size="42" font-weight="900">HB-2048</text>
+  <rect x="778" y="342" width="144" height="28" rx="14" fill="#dbeafe"/>
+  <rect x="420" y="414" width="648" height="208" rx="22" fill="#ffffff"/>
+  <text x="452" y="468" fill="#0f172a" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="900">Staff schedule review</text>
+  <rect x="452" y="508" width="560" height="18" rx="9" fill="#e2e8f0"/>
+  <rect x="452" y="548" width="490" height="18" rx="9" fill="#bae6fd"/>
+  <rect x="452" y="588" width="530" height="18" rx="9" fill="#bbf7d0"/>
+</svg>

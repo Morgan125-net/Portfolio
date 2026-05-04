@@ -1,5 +1,6 @@
 function Hero({
   credibilityPoints,
+  hasCustomProfilePhoto,
   isAdmin,
   onClearProfilePhoto,
   onProfileUpload,
@@ -69,7 +70,9 @@ function Hero({
         {isAdmin && (
           <div className="profile-photo-manager">
             <div>
-              <strong>{profilePhoto ? "Profile photo added" : "Add your profile photo"}</strong>
+              <strong>
+                {hasCustomProfilePhoto ? "Custom profile photo added" : "Replace default profile photo"}
+              </strong>
               <p>Choose a clear portrait. It saves in this browser after upload.</p>
             </div>
             <input
@@ -78,7 +81,7 @@ function Hero({
               accept="image/*"
               onChange={onProfileUpload}
             />
-            {profilePhoto && (
+            {hasCustomProfilePhoto && (
               <button className="text-button" type="button" onClick={onClearProfilePhoto}>
                 Remove photo
               </button>

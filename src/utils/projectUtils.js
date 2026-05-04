@@ -11,6 +11,10 @@ export function projectToDraft(project) {
     tags: (project.tags || []).join(", "),
     features: (project.features || []).join("\n"),
     image: project.image || "",
+    imageUrl: project.imageUrl || "",
+    liveUrl: project.liveUrl || "",
+    sourceUrl: project.sourceUrl || "",
+    caseStudyUrl: project.caseStudyUrl || "",
   };
 }
 
@@ -22,6 +26,12 @@ export function readStoredProjects() {
     return parsedProjects.map((project) => ({
       role: "Project owner",
       problem: "A real workflow needed a clearer, more usable solution.",
+      image: "",
+      imageUrl: "",
+      liveUrl: "",
+      sourceUrl: "",
+      caseStudyUrl: "",
+      ...starterProjects.find((starterProject) => starterProject.id === project.id),
       ...project,
     }));
   } catch {
