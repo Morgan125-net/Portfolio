@@ -1,5 +1,6 @@
 function Hero({
   credibilityPoints,
+  isAdmin,
   onClearProfilePhoto,
   onProfileUpload,
   profileMessage,
@@ -65,24 +66,26 @@ function Hero({
           )}
         </div>
 
-        <div className="profile-photo-manager">
-          <div>
-            <strong>{profilePhoto ? "Profile photo added" : "Add your profile photo"}</strong>
-            <p>Choose a clear portrait. It saves in this browser after upload.</p>
+        {isAdmin && (
+          <div className="profile-photo-manager">
+            <div>
+              <strong>{profilePhoto ? "Profile photo added" : "Add your profile photo"}</strong>
+              <p>Choose a clear portrait. It saves in this browser after upload.</p>
+            </div>
+            <input
+              className="profile-file-input"
+              type="file"
+              accept="image/*"
+              onChange={onProfileUpload}
+            />
+            {profilePhoto && (
+              <button className="text-button" type="button" onClick={onClearProfilePhoto}>
+                Remove photo
+              </button>
+            )}
+            {profileMessage && <p className="profile-message">{profileMessage}</p>}
           </div>
-          <input
-            className="profile-file-input"
-            type="file"
-            accept="image/*"
-            onChange={onProfileUpload}
-          />
-          {profilePhoto && (
-            <button className="text-button" type="button" onClick={onClearProfilePhoto}>
-              Remove photo
-            </button>
-          )}
-          {profileMessage && <p className="profile-message">{profileMessage}</p>}
-        </div>
+        )}
 
         <div>
           <p className="panel-label">Morgan Muraya</p>

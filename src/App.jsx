@@ -219,6 +219,7 @@ function App() {
 
       <Hero
         credibilityPoints={credibilityPoints}
+        isAdmin={isAdmin}
         onClearProfilePhoto={handleClearProfilePhoto}
         onProfileUpload={handleProfileUpload}
         profileMessage={profileMessage}
