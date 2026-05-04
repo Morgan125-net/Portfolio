@@ -143,6 +143,16 @@ function ProjectForm({
         </label>
 
         <label className="full-field">
+          Gallery image paths or URLs
+          <textarea
+            name="galleryImages"
+            value={draft.galleryImages}
+            onChange={onChange}
+            placeholder={"/projects/login.png\n/projects/admin-portal.png"}
+          />
+        </label>
+
+        <label className="full-field">
           Case study or write-up link
           <input
             name="caseStudyUrl"
@@ -215,55 +225,74 @@ function ProjectLinks({ project }) {
   );
 }
 
+function ProjectGallery({ project }) {
+  const galleryImages = project.galleryImages || [];
+
+  if (!galleryImages.length) return null;
+
+  return (
+    <div className="project-gallery" aria-label={`${project.title} screenshots`}>
+      {galleryImages.map((image) => (
+        <figure key={image}>
+          <img src={image} alt={`${project.title} screenshot`} />
+        </figure>
+      ))}
+    </div>
+  );
+}
+
 function FeaturedProject({ isAdmin, onEdit, onRemove, project }) {
   return (
-    <article className="featured-project">
-      <div className="project-media">
-        <ProjectVisual project={project} />
-      </div>
-
-      <div className="project-copy">
-        <p className="section-kicker">{project.category}</p>
-        <h3>{project.title}</h3>
-        <p>{project.summary}</p>
-
-        <div className="case-facts" aria-label={`${project.title} case study facts`}>
-          <div>
-            <span>Role</span>
-            <strong>{project.role}</strong>
-          </div>
-          <div>
-            <span>Problem</span>
-            <strong>{project.problem}</strong>
-          </div>
-          <div>
-            <span>Outcome</span>
-            <strong>{project.impact}</strong>
-          </div>
+    <article className="featured-project-shell">
+      <div className="featured-project">
+        <div className="project-media">
+          <ProjectVisual project={project} />
         </div>
 
-        <div className="project-meta">
-          {project.tags.map((tag) => (
-            <span key={tag}>{tag}</span>
-          ))}
+        <div className="project-copy">
+          <p className="section-kicker">{project.category}</p>
+          <h3>{project.title}</h3>
+          <p>{project.summary}</p>
+
+          <div className="case-facts" aria-label={`${project.title} case study facts`}>
+            <div>
+              <span>Role</span>
+              <strong>{project.role}</strong>
+            </div>
+            <div>
+              <span>Problem</span>
+              <strong>{project.problem}</strong>
+            </div>
+            <div>
+              <span>Outcome</span>
+              <strong>{project.impact}</strong>
+            </div>
+          </div>
+
+          <div className="project-meta">
+            {project.tags.map((tag) => (
+              <span key={tag}>{tag}</span>
+            ))}
+          </div>
+
+          <ul className="feature-list">
+            {project.features.map((feature) => (
+              <li key={feature}>{feature}</li>
+            ))}
+          </ul>
+
+          <ProjectLinks project={project} />
+
+          {isAdmin && (
+            <OwnerProjectActions
+              label="featured project"
+              onEdit={() => onEdit(project)}
+              onRemove={() => onRemove(project.id)}
+            />
+          )}
         </div>
-
-        <ul className="feature-list">
-          {project.features.map((feature) => (
-            <li key={feature}>{feature}</li>
-          ))}
-        </ul>
-
-        <ProjectLinks project={project} />
-
-        {isAdmin && (
-          <OwnerProjectActions
-            label="featured project"
-            onEdit={() => onEdit(project)}
-            onRemove={() => onRemove(project.id)}
-          />
-        )}
       </div>
+      <ProjectGallery project={project} />
     </article>
   );
 }

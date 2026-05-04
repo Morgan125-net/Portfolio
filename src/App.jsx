@@ -138,6 +138,7 @@ function App() {
       features: splitList(draft.features, "\n"),
       image: draft.image,
       imageUrl: draft.imageUrl.trim(),
+      galleryImages: splitList(draft.galleryImages, "\n"),
       liveUrl: draft.liveUrl.trim(),
       sourceUrl: draft.sourceUrl.trim(),
       caseStudyUrl: draft.caseStudyUrl.trim(),
