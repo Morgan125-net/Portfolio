@@ -225,6 +225,34 @@ function ProjectLinks({ project }) {
   );
 }
 
+function getProjectImageSource(project) {
+  return project.image || project.imageUrl || project.galleryImages?.[0] || "";
+}
+
+function ProjectMediaLink({ className, project }) {
+  const imageSource = getProjectImageSource(project);
+
+  if (!imageSource) {
+    return (
+      <div className={className}>
+        <ProjectVisual project={project} />
+      </div>
+    );
+  }
+
+  return (
+    <a
+      aria-label={`Open ${project.title} screenshot`}
+      className={`${className} project-image-link`}
+      href={imageSource}
+      rel="noreferrer"
+      target="_blank"
+    >
+      <ProjectVisual project={project} />
+    </a>
+  );
+}
+
 function ProjectGallery({ project }) {
   const galleryImages = project.galleryImages || [];
 
@@ -234,7 +262,9 @@ function ProjectGallery({ project }) {
     <div className="project-gallery" aria-label={`${project.title} screenshots`}>
       {galleryImages.map((image) => (
         <figure key={image}>
-          <img src={image} alt={`${project.title} screenshot`} />
+          <a href={image} rel="noreferrer" target="_blank">
+            <img src={image} alt={`${project.title} screenshot`} />
+          </a>
         </figure>
       ))}
     </div>
@@ -245,9 +275,7 @@ function FeaturedProject({ isAdmin, onEdit, onRemove, project }) {
   return (
     <article className="featured-project-shell">
       <div className="featured-project">
-        <div className="project-media">
-          <ProjectVisual project={project} />
-        </div>
+        <ProjectMediaLink className="project-media" project={project} />
 
         <div className="project-copy">
           <p className="section-kicker">{project.category}</p>
@@ -300,9 +328,7 @@ function FeaturedProject({ isAdmin, onEdit, onRemove, project }) {
 function ProjectCard({ isAdmin, onEdit, onRemove, project }) {
   return (
     <article className="project-card">
-      <div className="project-card-media">
-        <ProjectVisual project={project} />
-      </div>
+      <ProjectMediaLink className="project-card-media" project={project} />
       <div className="project-card-body">
         <p className="section-kicker">{project.category}</p>
         <h3>{project.title}</h3>
