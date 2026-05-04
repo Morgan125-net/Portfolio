@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import ProjectVisual from "./ProjectVisual";
 
 function ProjectForm({
@@ -229,7 +230,7 @@ function getProjectImageSource(project) {
   return project.image || project.imageUrl || project.galleryImages?.[0] || "";
 }
 
-function ProjectMediaLink({ className, project }) {
+function ProjectMediaButton({ className, onImageOpen, project }) {
   const imageSource = getProjectImageSource(project);
 
   if (!imageSource) {
@@ -241,19 +242,18 @@ function ProjectMediaLink({ className, project }) {
   }
 
   return (
-    <a
+    <button
       aria-label={`Open ${project.title} screenshot`}
       className={`${className} project-image-link`}
-      href={imageSource}
-      rel="noreferrer"
-      target="_blank"
+      onClick={() => onImageOpen(imageSource, `${project.title} screenshot`)}
+      type="button"
     >
       <ProjectVisual project={project} />
-    </a>
+    </button>
   );
 }
 
-function ProjectGallery({ project }) {
+function ProjectGallery({ onImageOpen, project }) {
   const galleryImages = project.galleryImages || [];
 
   if (!galleryImages.length) return null;
@@ -262,20 +262,28 @@ function ProjectGallery({ project }) {
     <div className="project-gallery" aria-label={`${project.title} screenshots`}>
       {galleryImages.map((image) => (
         <figure key={image}>
-          <a href={image} rel="noreferrer" target="_blank">
+          <button
+            aria-label={`Open ${project.title} screenshot`}
+            onClick={() => onImageOpen(image, `${project.title} screenshot`)}
+            type="button"
+          >
             <img src={image} alt={`${project.title} screenshot`} />
-          </a>
+          </button>
         </figure>
       ))}
     </div>
   );
 }
 
-function FeaturedProject({ isAdmin, onEdit, onRemove, project }) {
+function FeaturedProject({ isAdmin, onEdit, onImageOpen, onRemove, project }) {
   return (
     <article className="featured-project-shell">
       <div className="featured-project">
-        <ProjectMediaLink className="project-media" project={project} />
+        <ProjectMediaButton
+          className="project-media"
+          onImageOpen={onImageOpen}
+          project={project}
+        />
 
         <div className="project-copy">
           <p className="section-kicker">{project.category}</p>
@@ -320,15 +328,19 @@ function FeaturedProject({ isAdmin, onEdit, onRemove, project }) {
           )}
         </div>
       </div>
-      <ProjectGallery project={project} />
+      <ProjectGallery onImageOpen={onImageOpen} project={project} />
     </article>
   );
 }
 
-function ProjectCard({ isAdmin, onEdit, onRemove, project }) {
+function ProjectCard({ isAdmin, onEdit, onImageOpen, onRemove, project }) {
   return (
     <article className="project-card">
-      <ProjectMediaLink className="project-card-media" project={project} />
+      <ProjectMediaButton
+        className="project-card-media"
+        onImageOpen={onImageOpen}
+        project={project}
+      />
       <div className="project-card-body">
         <p className="section-kicker">{project.category}</p>
         <h3>{project.title}</h3>
@@ -352,6 +364,43 @@ function ProjectCard({ isAdmin, onEdit, onRemove, project }) {
   );
 }
 
+function ProjectImageViewer({ image, onClose }) {
+  useEffect(() => {
+    if (!image) return undefined;
+
+    function handleKeyDown(event) {
+      if (event.key === "Escape") onClose();
+    }
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [image, onClose]);
+
+  if (!image) return null;
+
+  return (
+    <div className="image-viewer" role="dialog" aria-modal="true" aria-label={image.alt}>
+      <button
+        className="image-viewer-backdrop"
+        type="button"
+        onClick={onClose}
+        aria-label="Close image preview"
+      />
+      <div className="image-viewer-panel">
+        <button className="image-viewer-close" type="button" onClick={onClose}>
+          Close
+        </button>
+        <img src={image.src} alt={image.alt} />
+      </div>
+    </div>
+  );
+}
+
 function Projects({
   draft,
   editingProjectId,
@@ -370,6 +419,12 @@ function Projects({
   onSubmitProject,
   remainingProjects,
 }) {
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  function handleImageOpen(src, alt) {
+    setSelectedImage({ src, alt });
+  }
+
   return (
     <section id="projects" className="section-shell">
       <div className="section-heading project-heading">
@@ -407,6 +462,7 @@ function Projects({
         <FeaturedProject
           isAdmin={isAdmin}
           onEdit={onEditProject}
+          onImageOpen={handleImageOpen}
           onRemove={onRemoveProject}
           project={featuredProject}
         />
@@ -418,11 +474,13 @@ function Projects({
             isAdmin={isAdmin}
             key={project.id}
             onEdit={onEditProject}
+            onImageOpen={handleImageOpen}
             onRemove={onRemoveProject}
             project={project}
           />
         ))}
       </div>
+      <ProjectImageViewer image={selectedImage} onClose={() => setSelectedImage(null)} />
     </section>
   );
 }
