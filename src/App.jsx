@@ -65,11 +65,22 @@ function App() {
     const file = event.target.files[0];
     setProfileMessage("");
 
+    if (!file) {
+      setProfileMessage("Please choose an image file to upload.");
+      return;
+    }
+
     try {
       const image = await compressImage(file);
-      setProfilePhoto(image);
-      localStorage.setItem(STORAGE_KEYS.profilePhoto, image);
-      setProfileMessage("Profile photo saved.");
+      try {
+        localStorage.setItem(STORAGE_KEYS.profilePhoto, image);
+        setProfilePhoto(image);
+        setProfileMessage("Profile photo saved.");
+      } catch {
+        setProfileMessage(
+          "Unable to save your photo. Try a smaller image or check browser storage settings.",
+        );
+      }
       event.target.value = "";
     } catch (error) {
       setProfileMessage(error.message || "That photo could not be saved.");
@@ -208,7 +219,6 @@ function App() {
 
       <Hero
         credibilityPoints={credibilityPoints}
-        isAdmin={isAdmin}
         onClearProfilePhoto={handleClearProfilePhoto}
         onProfileUpload={handleProfileUpload}
         profileMessage={profileMessage}
