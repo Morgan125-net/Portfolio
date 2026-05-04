@@ -101,6 +101,8 @@ function App() {
   async function handleProjectImage(event) {
     const file = event.target.files[0];
 
+    if (!file) return;
+
     try {
       const image = await compressImage(file, 1400, 0.8);
       setDraft((current) => ({ ...current, image }));
@@ -108,6 +110,10 @@ function App() {
     } catch {
       setDraft((current) => ({ ...current, image: "" }));
     }
+  }
+
+  function handleRemoveProjectImage() {
+    setDraft((current) => ({ ...current, image: "" }));
   }
 
   function handleSubmitProject(event) {
@@ -246,6 +252,7 @@ function App() {
         onEditProject={handleEditProject}
         onImageChange={handleProjectImage}
         onManagerToggle={handleManagerToggle}
+        onRemoveImage={handleRemoveProjectImage}
         onRemoveProject={handleRemoveProject}
         onResetProjects={handleResetProjects}
         onSubmitProject={handleSubmitProject}

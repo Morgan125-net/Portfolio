@@ -6,6 +6,7 @@ function ProjectForm({
   onCancelEdit,
   onChange,
   onImageChange,
+  onRemoveImage,
   onReset,
   onSubmit,
 }) {
@@ -123,8 +124,13 @@ function ProjectForm({
       </div>
 
       {draft.image && (
-        <div className="draft-preview">
-          <img src={draft.image} alt="New project preview" />
+        <div className="draft-preview-block">
+          <div className="draft-preview">
+            <img src={draft.image} alt="Project preview" />
+          </div>
+          <button className="text-button danger" type="button" onClick={onRemoveImage}>
+            Remove project image
+          </button>
         </div>
       )}
 
@@ -150,7 +156,7 @@ function OwnerProjectActions({ label = "project", onEdit, onRemove }) {
   );
 }
 
-function FeaturedProject({ isAdmin, managerOpen, onEdit, onRemove, project }) {
+function FeaturedProject({ isAdmin, onEdit, onRemove, project }) {
   return (
     <article className="featured-project">
       <div className="project-media">
@@ -189,7 +195,7 @@ function FeaturedProject({ isAdmin, managerOpen, onEdit, onRemove, project }) {
           ))}
         </ul>
 
-        {isAdmin && managerOpen && (
+        {isAdmin && (
           <OwnerProjectActions
             label="featured project"
             onEdit={() => onEdit(project)}
@@ -201,7 +207,7 @@ function FeaturedProject({ isAdmin, managerOpen, onEdit, onRemove, project }) {
   );
 }
 
-function ProjectCard({ isAdmin, managerOpen, onEdit, onRemove, project }) {
+function ProjectCard({ isAdmin, onEdit, onRemove, project }) {
   return (
     <article className="project-card">
       <div className="project-card-media">
@@ -218,7 +224,7 @@ function ProjectCard({ isAdmin, managerOpen, onEdit, onRemove, project }) {
             <span key={tag}>{tag}</span>
           ))}
         </div>
-        {isAdmin && managerOpen && (
+        {isAdmin && (
           <OwnerProjectActions
             onEdit={() => onEdit(project)}
             onRemove={() => onRemove(project.id)}
@@ -240,6 +246,7 @@ function Projects({
   onEditProject,
   onImageChange,
   onManagerToggle,
+  onRemoveImage,
   onRemoveProject,
   onResetProjects,
   onSubmitProject,
@@ -270,6 +277,7 @@ function Projects({
           onCancelEdit={onCancelEdit}
           onChange={onDraftChange}
           onImageChange={onImageChange}
+          onRemoveImage={onRemoveImage}
           onReset={onResetProjects}
           onSubmit={onSubmitProject}
         />
@@ -278,7 +286,6 @@ function Projects({
       {featuredProject && (
         <FeaturedProject
           isAdmin={isAdmin}
-          managerOpen={managerOpen}
           onEdit={onEditProject}
           onRemove={onRemoveProject}
           project={featuredProject}
@@ -290,7 +297,6 @@ function Projects({
           <ProjectCard
             isAdmin={isAdmin}
             key={project.id}
-            managerOpen={managerOpen}
             onEdit={onEditProject}
             onRemove={onRemoveProject}
             project={project}
