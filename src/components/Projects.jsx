@@ -1,111 +1,6 @@
 import { useEffect, useState } from "react";
 import ProjectVisual from "./ProjectVisual";
 
-const PROJECT_FIELDS = [
-  { name: "title", label: "Project title", placeholder: "Inventory Management Dashboard", required: true },
-  { name: "category", label: "Category", placeholder: "Full-stack web app" },
-  { name: "summary", label: "Short summary", placeholder: "What the project does, who it helps, and what problem it solves.", full: true, multiline: true, required: true },
-  { name: "role", label: "Your role", placeholder: "Full-stack developer" },
-  { name: "problem", label: "Problem solved", placeholder: "Manual tracking was slow and unclear" },
-  { name: "impact", label: "Result or impact", placeholder: "Example: reduced manual tracking, improved reporting, made bookings easier, or made support faster.", full: true, multiline: true },
-  { name: "tags", label: "Tech tags", placeholder: "React, Node.js, Express" },
-  { name: "imageUrl", label: "Permanent image path or URL", placeholder: "/projects/project-screenshot.jpg or https://..." },
-  { name: "imageUpload", label: "Quick image upload", type: "file" },
-  { name: "liveUrl", label: "Live demo link", placeholder: "https://example.com" },
-  { name: "sourceUrl", label: "Source code link", placeholder: "https://github.com/..." },
-  { name: "galleryImages", label: "Gallery image paths or URLs", placeholder: "/projects/login.png\n/projects/admin-portal.png", full: true, multiline: true },
-  { name: "caseStudyUrl", label: "Case study or write-up link", placeholder: "https://... or /case-studies/project-name", full: true },
-  { name: "features", label: "Features", placeholder: "Dashboard for admins\nUser authentication\nReport export", full: true, multiline: true },
-];
-
-function ProjectForm({
-  draft,
-  editingProjectId,
-  onCancelEdit,
-  onChange,
-  onImageChange,
-  onRemoveImage,
-  onReset,
-  onSubmit,
-}) {
-  return (
-    <form className="project-manager" onSubmit={onSubmit}>
-      <div className="form-header">
-        <div>
-          <p className="section-kicker">Project Manager</p>
-          <h3>{editingProjectId ? "Edit portfolio project" : "Add a new portfolio project"}</h3>
-          <p className="manager-note">
-            {editingProjectId
-              ? "Update the details and save. This edits the existing project."
-              : "Add the useful details first. The newest project becomes the featured case study."}
-          </p>
-        </div>
-        <div className="manager-actions">
-          {editingProjectId && (
-            <button type="button" className="text-button" onClick={onCancelEdit}>
-              Cancel edit
-            </button>
-          )}
-          <button type="button" className="text-button" onClick={onReset}>
-            Reset examples
-          </button>
-        </div>
-      </div>
-
-      <div className="form-grid">
-        {PROJECT_FIELDS.map(({ full, label, multiline, ...field }) => {
-          if (field.type === "file") {
-            return (
-              <label key={field.name}>
-                {label}
-                <input type="file" accept="image/*" onChange={onImageChange} />
-              </label>
-            );
-          }
-
-          const Field = multiline ? "textarea" : "input";
-
-          return (
-            <label className={full ? "full-field" : undefined} key={field.name}>
-              {label}
-              <Field {...field} value={draft[field.name]} onChange={onChange} />
-            </label>
-          );
-        })}
-      </div>
-
-      {draft.image && (
-        <div className="draft-preview-block">
-          <div className="draft-preview">
-            <img src={draft.image} alt="Project preview" />
-          </div>
-          <button className="text-button danger" type="button" onClick={onRemoveImage}>
-            Remove project image
-          </button>
-        </div>
-      )}
-      <div className="form-actions">
-        <button className="button button-primary" type="submit">
-          {editingProjectId ? "Save Changes" : "Save Project"}
-        </button>
-      </div>
-    </form>
-  );
-}
-
-function OwnerProjectActions({ label = "project", onEdit, onRemove }) {
-  return (
-    <div className="project-owner-actions">
-      <button className="text-button" type="button" onClick={onEdit}>
-        Edit {label}
-      </button>
-      <button className="text-button danger" type="button" onClick={onRemove}>
-        Remove {label}
-      </button>
-    </div>
-  );
-}
-
 function ProjectLinks({ project }) {
   const links = [
     { href: project.liveUrl, label: "Live demo" },
@@ -175,7 +70,7 @@ function ProjectGallery({ onImageOpen, project }) {
   );
 }
 
-function FeaturedProject({ isAdmin, onEdit, onImageOpen, onRemove, project }) {
+function FeaturedProject({ onImageOpen, project }) {
   return (
     <article className="featured-project-shell">
       <div className="featured-project">
@@ -218,14 +113,6 @@ function FeaturedProject({ isAdmin, onEdit, onImageOpen, onRemove, project }) {
           </ul>
 
           <ProjectLinks project={project} />
-
-          {isAdmin && (
-            <OwnerProjectActions
-              label="featured project"
-              onEdit={() => onEdit(project)}
-              onRemove={() => onRemove(project.id)}
-            />
-          )}
         </div>
       </div>
       <ProjectGallery onImageOpen={onImageOpen} project={project} />
@@ -233,7 +120,7 @@ function FeaturedProject({ isAdmin, onEdit, onImageOpen, onRemove, project }) {
   );
 }
 
-function ProjectCard({ isAdmin, onEdit, onImageOpen, onRemove, project }) {
+function ProjectCard({ onImageOpen, project }) {
   return (
     <article className="project-card">
       <ProjectMediaButton
@@ -253,12 +140,6 @@ function ProjectCard({ isAdmin, onEdit, onImageOpen, onRemove, project }) {
           ))}
         </div>
         <ProjectLinks project={project} />
-        {isAdmin && (
-          <OwnerProjectActions
-            onEdit={() => onEdit(project)}
-            onRemove={() => onRemove(project.id)}
-          />
-        )}
       </div>
     </article>
   );
@@ -301,24 +182,7 @@ function ProjectImageViewer({ image, onClose }) {
   );
 }
 
-function Projects({
-  draft,
-  editingProjectId,
-  featuredProject,
-  isAdmin,
-  managerOpen,
-  onCancelEdit,
-  onDraftChange,
-  onEditProject,
-  onImageChange,
-  onManagerToggle,
-  projectMessage,
-  onRemoveImage,
-  onRemoveProject,
-  onResetProjects,
-  onSubmitProject,
-  remainingProjects,
-}) {
+function Projects({ featuredProject, remainingProjects }) {
   const [selectedImage, setSelectedImage] = useState(null);
 
   function handleImageOpen(src, alt) {
@@ -332,38 +196,11 @@ function Projects({
           <p className="section-kicker">Selected Work</p>
           <h2>Selected projects showcasing real problems, clear roles, and measurable outcomes</h2>
         </div>
-        {isAdmin && (
-          <button
-            className="button button-secondary manager-toggle"
-            type="button"
-            onClick={onManagerToggle}
-          >
-            {managerOpen ? "Close Manager" : "Add Project"}
-          </button>
-      )}
       </div>
-
-      {isAdmin && projectMessage && <p className="project-message">{projectMessage}</p>}
-
-      {isAdmin && managerOpen && (
-        <ProjectForm
-          draft={draft}
-          editingProjectId={editingProjectId}
-          onCancelEdit={onCancelEdit}
-          onChange={onDraftChange}
-          onImageChange={onImageChange}
-          onRemoveImage={onRemoveImage}
-          onReset={onResetProjects}
-          onSubmit={onSubmitProject}
-        />
-      )}
 
       {featuredProject && (
         <FeaturedProject
-          isAdmin={isAdmin}
-          onEdit={onEditProject}
           onImageOpen={handleImageOpen}
-          onRemove={onRemoveProject}
           project={featuredProject}
         />
       )}
@@ -371,11 +208,8 @@ function Projects({
       <div className="project-grid">
         {remainingProjects.map((project) => (
           <ProjectCard
-            isAdmin={isAdmin}
             key={project.id}
-            onEdit={onEditProject}
             onImageOpen={handleImageOpen}
-            onRemove={onRemoveProject}
             project={project}
           />
         ))}

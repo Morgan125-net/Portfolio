@@ -1,6 +1,6 @@
 function Skills({ professionalContext, skillGroups, skills }) {
   return (
-    <section className="section-shell skills-section">
+    <section id="skills" className="section-shell skills-section">
       <div className="section-heading">
         <p className="section-kicker">Explore my</p>
         <h2>Experience by technical area</h2>

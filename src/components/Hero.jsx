@@ -4,10 +4,10 @@ function Hero({ credibilityPoints, profilePhoto }) {
       <div className="hero-copy">
         <p className="eyebrow">Hello, I'm</p>
         <h1>Morgan Muraya</h1>
-        <p className="hero-role">🌐 Web Developer | ⚙️ IT Support Specialist | 📚 Technical Writer</p>
+        <p className="hero-role">Full-Stack Developer</p>
         <p className="hero-summary">
-          I bring together web development, IT support, and technical writing to solve problems,
-          guide teams, and deliver polished solutions across both technical and business contexts.
+          I build full-stack web applications with React and Node.js — backed by hands-on IT support
+          experience in a live hospital environment and a habit of documenting things clearly along the way.
         </p>
 
         <div className="hero-actions">

@@ -9,8 +9,12 @@ function Footer() {
             {link}
           </a>
         ))}
+        <a href="https://github.com/Morgan125-net" target="_blank" rel="noreferrer">
+          GitHub
+        </a>
+        {/* TODO: add LinkedIn once you share the URL — <a href="...">LinkedIn</a> */}
       </nav>
-      <p>(c) 2026 Morgan Muraya. IT Support Specialist | Full-Stack Developer | Technical Writer</p>
+      <p>(c) 2026 Morgan Muraya. Full-Stack Developer | IT Support Specialist | Technical Writer</p>
     </footer>
   );
 }

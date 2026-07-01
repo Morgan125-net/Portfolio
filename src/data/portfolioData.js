@@ -182,27 +182,30 @@ export const experience = [
   {
     role: "IT Support Specialist",
     company: "Hospital IT Department",
-    period: "Healthcare IT Environment",
+    dates: "[Add dates — e.g. Jan 2024 – Present]",
+    context: "Healthcare IT Environment",
     description:
       "Provided on-site technical support to clinical and administrative staff in a high-pressure hospital environment. Resolved software, hardware, and network issues promptly, minimizing downtime and ensuring continuity of patient care. Documented incidents and solutions to improve team knowledge and response times.",
   },
   {
     role: "Full-Stack Developer",
     company: "Independent Projects & Freelance",
-    period: "React, Node.js, Express, Database Systems",
+    dates: "[Add dates]",
+    context: "React, Node.js, Express, Database Systems",
     description:
       "Designed and built full-stack web applications including booking systems, data dashboards, and admin portals. Integrated RESTful APIs, managed database schemas, and delivered responsive, accessible front-end interfaces tailored to client requirements.",
   },
   {
     role: "Technical Writer & Documentarian",
     company: "Freelance & Project-Based",
-    period: "Reports, Proposals, User Guides",
+    dates: "[Add dates]",
+    context: "Reports, Proposals, User Guides",
     description:
       "Developed clear, structured technical documentation from raw requirements and scattered notes. Produced project reports, user guides, proposal documents, and system handover notes that improved knowledge sharing and reduced onboarding time for stakeholders.",
   },
 ];
 
-export const starterProjects = [
+export const projects = [
   {
     id: "hospital-booking",
     title: "Hospital Appointment Booking & Reminder System",
@@ -223,32 +226,15 @@ export const starterProjects = [
       "Responsive front-end with API-driven back-end architecture",
     ],
     image: "",
-    imageUrl: "/projects/booking.png",
+    imageUrl: "/projects/booking.webp",
     galleryImages: [
-      "/projects/login.png",
-      "/projects/admin-portal.png",
-      "/projects/staff-portal.png",
-      "/projects/doctors-portal.png",
+      "/projects/login.webp",
+      "/projects/admin-portal.webp",
+      "/projects/staff-portal.webp",
+      "/projects/doctors-portal.webp",
     ],
-    liveUrl: "",
-    sourceUrl: "",
+    liveUrl: "https://hospital-xzlo.vercel.app", // spotted in your own booking.png screenshot — confirm it still resolves
+    sourceUrl: "", // TODO: add a link to this project's GitHub repo if it's public
     caseStudyUrl: "",
   },
 ];
-
-export const emptyProject = {
-  title: "",
-  category: "",
-  summary: "",
-  role: "",
-  problem: "",
-  impact: "",
-  tags: "",
-  features: "",
-  image: "",
-  imageUrl: "",
-  galleryImages: "",
-  liveUrl: "",
-  sourceUrl: "",
-  caseStudyUrl: "",
-};
