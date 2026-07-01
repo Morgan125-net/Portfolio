@@ -1,27 +1,24 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Experience from "./components/Experience";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import OwnerLogin from "./components/OwnerLogin";
-import OwnerDock from "./components/OwnerDock";
-import Process from "./components/Process";
 import Projects from "./components/Projects";
 import Services from "./components/Services";
 import Skills from "./components/Skills";
-import defaultProfilePhoto from "./assets/profile.jpg";
+import defaultProfilePhoto from "./assets/profile.png";
 import {
-  ADMIN_PIN,
+  aboutHighlights,
   credibilityPoints,
   emptyProject,
   experience,
   professionalContext,
-  processSteps,
   serviceDetails,
   services,
   skills,
+  skillGroups,
   starterProjects,
   STORAGE_KEYS,
 } from "./data/portfolioData";
@@ -30,17 +27,7 @@ import { projectToDraft, readStoredProjects, saveProjects, splitList } from "./u
 import "./App.css";
 
 function App() {
-  const [theme, setTheme] = useState(() => localStorage.getItem(STORAGE_KEYS.theme) || "dark");
-  const [isAdmin, setIsAdmin] = useState(
-    () => sessionStorage.getItem(STORAGE_KEYS.adminUnlocked) === "true",
-  );
-  const [adminPanelOpen, setAdminPanelOpen] = useState(false);
-  const [adminPin, setAdminPin] = useState("");
-  const [adminError, setAdminError] = useState("");
-  const [profilePhoto, setProfilePhoto] = useState(
-    () => localStorage.getItem(STORAGE_KEYS.profilePhoto) || "",
-  );
-  const [profileMessage, setProfileMessage] = useState("");
+  const [theme, setTheme] = useState(() => localStorage.getItem(STORAGE_KEYS.theme) || "light");
   const [projects, setProjects] = useState(readStoredProjects);
   const [projectMessage, setProjectMessage] = useState("");
   const [managerOpen, setManagerOpen] = useState(false);
@@ -49,7 +36,7 @@ function App() {
   const [activeServiceId, setActiveServiceId] = useState(serviceDetails[0].id);
 
   const featuredProject = projects[0];
-  const remainingProjects = useMemo(() => projects.slice(1), [projects]);
+  const remainingProjects = projects.slice(1);
   const activeService = serviceDetails.find((service) => service.id === activeServiceId);
 
   function updateProjects(nextProjects) {
@@ -61,38 +48,6 @@ function App() {
     const nextTheme = theme === "dark" ? "light" : "dark";
     setTheme(nextTheme);
     localStorage.setItem(STORAGE_KEYS.theme, nextTheme);
-  }
-
-  async function handleProfileUpload(event) {
-    const file = event.target.files[0];
-    setProfileMessage("");
-
-    if (!file) {
-      setProfileMessage("Please choose an image file to upload.");
-      return;
-    }
-
-    try {
-      const image = await compressImage(file);
-      try {
-        localStorage.setItem(STORAGE_KEYS.profilePhoto, image);
-        setProfilePhoto(image);
-        setProfileMessage("Profile photo saved.");
-      } catch {
-        setProfileMessage(
-          "Unable to save your photo. Try a smaller image or check browser storage settings.",
-        );
-      }
-      event.target.value = "";
-    } catch (error) {
-      setProfileMessage(error.message || "That photo could not be saved.");
-    }
-  }
-
-  function handleClearProfilePhoto() {
-    setProfilePhoto("");
-    localStorage.removeItem(STORAGE_KEYS.profilePhoto);
-    setProfileMessage("Profile photo removed.");
   }
 
   function handleDraftChange(event) {
@@ -194,27 +149,6 @@ function App() {
     setProjectMessage("Example projects restored.");
   }
 
-  function handleAdminUnlock(event) {
-    event.preventDefault();
-
-    if (adminPin === ADMIN_PIN) {
-      setIsAdmin(true);
-      setAdminPanelOpen(false);
-      setAdminPin("");
-      setAdminError("");
-      sessionStorage.setItem(STORAGE_KEYS.adminUnlocked, "true");
-      return;
-    }
-
-    setAdminError("Wrong owner PIN.");
-  }
-
-  function handleAdminLock() {
-    setIsAdmin(false);
-    setManagerOpen(false);
-    sessionStorage.removeItem(STORAGE_KEYS.adminUnlocked);
-  }
-
   function handleManagerToggle() {
     if (managerOpen) {
       handleCancelEdit();
@@ -227,32 +161,8 @@ function App() {
     <main className="portfolio" data-theme={theme}>
       <Header onThemeToggle={toggleTheme} theme={theme} />
 
-      <OwnerDock
-        adminPanelOpen={adminPanelOpen}
-        isAdmin={isAdmin}
-        onAdminLock={handleAdminLock}
-        onAdminPanelToggle={() => setAdminPanelOpen(!adminPanelOpen)}
-      />
-
-      {adminPanelOpen && !isAdmin && (
-        <OwnerLogin
-          adminError={adminError}
-          adminPin={adminPin}
-          onPinChange={setAdminPin}
-          onSubmit={handleAdminUnlock}
-        />
-      )}
-
-      <Hero
-        credibilityPoints={credibilityPoints}
-        hasCustomProfilePhoto={Boolean(profilePhoto)}
-        isAdmin={isAdmin}
-        onClearProfilePhoto={handleClearProfilePhoto}
-        onProfileUpload={handleProfileUpload}
-        profileMessage={profileMessage}
-        profilePhoto={profilePhoto || defaultProfilePhoto}
-      />
-      <About />
+      <Hero credibilityPoints={credibilityPoints} profilePhoto={defaultProfilePhoto} />
+      <About highlights={aboutHighlights} />
       <Services
         activeService={activeService}
         activeServiceId={activeServiceId}
@@ -260,13 +170,11 @@ function App() {
         serviceDetails={serviceDetails}
         services={services}
       />
-      <Process processSteps={processSteps} />
       <Experience experience={experience} />
       <Projects
         draft={draft}
         editingProjectId={editingProjectId}
         featuredProject={featuredProject}
-        isAdmin={isAdmin}
         managerOpen={managerOpen}
         onCancelEdit={handleCancelEdit}
         onDraftChange={handleDraftChange}
@@ -280,7 +188,7 @@ function App() {
         onSubmitProject={handleSubmitProject}
         remainingProjects={remainingProjects}
       />
-      <Skills professionalContext={professionalContext} skills={skills} />
+      <Skills professionalContext={professionalContext} skillGroups={skillGroups} skills={skills} />
       <Contact />
       <Footer />
     </main>

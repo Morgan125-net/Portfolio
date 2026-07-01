@@ -3,11 +3,11 @@ function Services({ activeService, activeServiceId, onServiceChange, serviceDeta
     <section id="services" className="section-shell services-section">
       <div className="section-heading">
         <p className="section-kicker">Services</p>
-        <h2>Focused technical help for the work people actually need done</h2>
+        <h2>Professional services designed to deliver real results</h2>
         <p>
-          I keep the service offering simple: build the tool, fix the blocker, or document the work
-          properly. Each service is designed to produce something useful, not just a nice looking
-          page.
+          I offer three core services: build the right tool, resolve the technical issue, or document
+          the work properly. Each service is designed to produce something useful, not just a
+          polished page, but a solution that works.
         </p>
       </div>
 

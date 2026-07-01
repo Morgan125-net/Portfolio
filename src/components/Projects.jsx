@@ -1,6 +1,23 @@
 import { useEffect, useState } from "react";
 import ProjectVisual from "./ProjectVisual";
 
+const PROJECT_FIELDS = [
+  { name: "title", label: "Project title", placeholder: "Inventory Management Dashboard", required: true },
+  { name: "category", label: "Category", placeholder: "Full-stack web app" },
+  { name: "summary", label: "Short summary", placeholder: "What the project does, who it helps, and what problem it solves.", full: true, multiline: true, required: true },
+  { name: "role", label: "Your role", placeholder: "Full-stack developer" },
+  { name: "problem", label: "Problem solved", placeholder: "Manual tracking was slow and unclear" },
+  { name: "impact", label: "Result or impact", placeholder: "Example: reduced manual tracking, improved reporting, made bookings easier, or made support faster.", full: true, multiline: true },
+  { name: "tags", label: "Tech tags", placeholder: "React, Node.js, Express" },
+  { name: "imageUrl", label: "Permanent image path or URL", placeholder: "/projects/project-screenshot.jpg or https://..." },
+  { name: "imageUpload", label: "Quick image upload", type: "file" },
+  { name: "liveUrl", label: "Live demo link", placeholder: "https://example.com" },
+  { name: "sourceUrl", label: "Source code link", placeholder: "https://github.com/..." },
+  { name: "galleryImages", label: "Gallery image paths or URLs", placeholder: "/projects/login.png\n/projects/admin-portal.png", full: true, multiline: true },
+  { name: "caseStudyUrl", label: "Case study or write-up link", placeholder: "https://... or /case-studies/project-name", full: true },
+  { name: "features", label: "Features", placeholder: "Dashboard for admins\nUser authentication\nReport export", full: true, multiline: true },
+];
+
 function ProjectForm({
   draft,
   editingProjectId,
@@ -36,142 +53,25 @@ function ProjectForm({
       </div>
 
       <div className="form-grid">
-        <label>
-          Project title
-          <input
-            name="title"
-            value={draft.title}
-            onChange={onChange}
-            placeholder="Inventory Management Dashboard"
-            required
-          />
-        </label>
+        {PROJECT_FIELDS.map(({ full, label, multiline, ...field }) => {
+          if (field.type === "file") {
+            return (
+              <label key={field.name}>
+                {label}
+                <input type="file" accept="image/*" onChange={onImageChange} />
+              </label>
+            );
+          }
 
-        <label>
-          Category
-          <input
-            name="category"
-            value={draft.category}
-            onChange={onChange}
-            placeholder="Full-stack web app"
-          />
-        </label>
+          const Field = multiline ? "textarea" : "input";
 
-        <label className="full-field">
-          Short summary
-          <textarea
-            name="summary"
-            value={draft.summary}
-            onChange={onChange}
-            placeholder="What the project does, who it helps, and what problem it solves."
-            required
-          />
-        </label>
-
-        <label>
-          Your role
-          <input
-            name="role"
-            value={draft.role}
-            onChange={onChange}
-            placeholder="Full-stack developer"
-          />
-        </label>
-
-        <label>
-          Problem solved
-          <input
-            name="problem"
-            value={draft.problem}
-            onChange={onChange}
-            placeholder="Manual tracking was slow and unclear"
-          />
-        </label>
-
-        <label className="full-field">
-          Result or impact
-          <textarea
-            name="impact"
-            value={draft.impact}
-            onChange={onChange}
-            placeholder="Example: reduced manual tracking, improved reporting, made bookings easier, or made support faster."
-          />
-        </label>
-
-        <label>
-          Tech tags
-          <input
-            name="tags"
-            value={draft.tags}
-            onChange={onChange}
-            placeholder="React, Node.js, MongoDB"
-          />
-        </label>
-
-        <label>
-          Permanent image path or URL
-          <input
-            name="imageUrl"
-            value={draft.imageUrl}
-            onChange={onChange}
-            placeholder="/projects/project-screenshot.jpg or https://..."
-          />
-        </label>
-
-        <label>
-          Quick image upload
-          <input type="file" accept="image/*" onChange={onImageChange} />
-        </label>
-
-        <label>
-          Live demo link
-          <input
-            name="liveUrl"
-            value={draft.liveUrl}
-            onChange={onChange}
-            placeholder="https://example.com"
-          />
-        </label>
-
-        <label>
-          Source code link
-          <input
-            name="sourceUrl"
-            value={draft.sourceUrl}
-            onChange={onChange}
-            placeholder="https://github.com/..."
-          />
-        </label>
-
-        <label className="full-field">
-          Gallery image paths or URLs
-          <textarea
-            name="galleryImages"
-            value={draft.galleryImages}
-            onChange={onChange}
-            placeholder={"/projects/login.png\n/projects/admin-portal.png"}
-          />
-        </label>
-
-        <label className="full-field">
-          Case study or write-up link
-          <input
-            name="caseStudyUrl"
-            value={draft.caseStudyUrl}
-            onChange={onChange}
-            placeholder="https://... or /case-studies/project-name"
-          />
-        </label>
-
-        <label className="full-field">
-          Features
-          <textarea
-            name="features"
-            value={draft.features}
-            onChange={onChange}
-            placeholder={"Dashboard for admins\nUser authentication\nReport export"}
-          />
-        </label>
+          return (
+            <label className={full ? "full-field" : undefined} key={field.name}>
+              {label}
+              <Field {...field} value={draft[field.name]} onChange={onChange} />
+            </label>
+          );
+        })}
       </div>
 
       {draft.image && (
@@ -430,7 +330,7 @@ function Projects({
       <div className="section-heading project-heading">
         <div>
           <p className="section-kicker">Selected Work</p>
-          <h2>Selected projects with the problem, role, and outcome made clear</h2>
+          <h2>Selected projects showcasing real problems, clear roles, and measurable outcomes</h2>
         </div>
         {isAdmin && (
           <button

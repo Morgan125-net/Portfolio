@@ -1,7 +1,16 @@
 function Footer() {
+  const footerLinks = ["About", "Experience", "Projects", "Contact"];
+
   return (
     <footer className="site-footer">
-      <p>© 2026 Morgan Muraya. Professional IT support, web development and technical writing.</p>
+      <nav aria-label="Footer navigation">
+        {footerLinks.map((link) => (
+          <a href={`#${link.toLowerCase()}`} key={link}>
+            {link}
+          </a>
+        ))}
+      </nav>
+      <p>(c) 2026 Morgan Muraya. IT Support Specialist | Full-Stack Developer | Technical Writer</p>
     </footer>
   );
 }

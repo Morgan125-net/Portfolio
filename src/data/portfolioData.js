@@ -1,57 +1,110 @@
-export const STORAGE_KEYS = {
-  adminUnlocked: "morgan.adminUnlocked",
-  profilePhoto: "morgan.profilePhoto",
+     export const STORAGE_KEYS = {
   projects: "morgan.projects",
   theme: "morgan.theme",
 };
 
-export const ADMIN_PIN = import.meta.env.VITE_ADMIN_PIN || "morgan2026";
 export const EMAIL_LINK = "mailto:murmorgan125@gmail.com";
 export const CALL_LINK = "tel:+254794589612";
 export const WHATSAPP_LINK = "https://wa.me/254794589612";
+export const REQUEST_CV_LINK = "mailto:murmorgan125@gmail.com?subject=CV%20request";
+
+export const socialLinks = [
+  {
+    label: "Email",
+    shortLabel: "EM",
+    href: EMAIL_LINK,
+  },
+  {
+    label: "WhatsApp",
+    shortLabel: "WA",
+    href: WHATSAPP_LINK,
+  },
+];
 
 export const skills = [
-  "React interfaces",
-  "JavaScript",
-  "Node.js APIs",
-  "Express",
-  "MongoDB",
-  "REST workflows",
-  "Responsive UI",
-  "IT troubleshooting",
-  "User support",
-  "Technical writing",
+  "React.js & Front-End Development",
+  "JavaScript (ES6+)",
+  "Node.js & Express API Development",
+  "Database Design & Management",
+  "RESTful API Integration",
+  "Responsive & Accessible UI Design",
+  "IT Systems & Network Troubleshooting",
+  "End-User Technical Support",
+  "Technical Writing & Documentation",
+  "Cross-Functional Collaboration",
 ];
 
 export const professionalContext = [
   {
-    label: "Core stack",
-    value: "React / Node / MongoDB",
+    label: "Full-Stack Development",
+    value: "React / Node.js / SQL & NoSQL Databases",
   },
   {
-    label: "Support setting",
-    value: "Hospital IT environment",
+    label: "Support Environment",
+    value: "Healthcare IT (Hospital setting)",
+  },
+];
+
+export const aboutHighlights = [
+  {
+    label: "Experience",
+    value: "Healthcare IT support and independent web projects",
+  },
+  {
+    label: "Focus",
+    value: "Web systems, technical support, and documentation",
+  },
+  {
+    label: "Delivery",
+    value: "Clear communication, maintainable work, and useful handover notes",
+  },
+];
+
+export const skillGroups = [
+  {
+    title: "Front-end",
+    items: [
+      { name: "React.js", level: "Experienced" },
+      { name: "JavaScript", level: "Experienced" },
+      { name: "Responsive UI", level: "Experienced" },
+    ],
+  },
+  {
+    title: "Back-end",
+    items: [
+      { name: "Node.js", level: "Working knowledge" },
+      { name: "Express APIs", level: "Working knowledge" },
+      { name: "Database Design", level: "Working knowledge" },
+    ],
+  },
+  {
+    title: "Support & Writing",
+    items: [
+      { name: "Troubleshooting", level: "Experienced" },
+      { name: "End-user Support", level: "Experienced" },
+      { name: "Technical Documentation", level: "Experienced" },
+    ],
   },
 ];
 
 export const services = [
   {
-    title: "Web apps and dashboards",
-    outcome: "Clean interfaces for real tasks",
+    title: "Web Applications & Dashboards",
+    outcome: "Functional, user-focused tools that solve real business problems",
     description:
-      "I build responsive web interfaces, booking flows, dashboards, and admin tools that are easy to understand and simple to maintain.",
+      "I design and develop responsive web interfaces, booking systems, data dashboards, and admin panels that prioritize usability, performance, and long-term maintainability.",
   },
   {
-    title: "IT Support",
-    outcome: "Calm troubleshooting, clear next steps",
+    title: "IT Support & Systems Assistance",
+    outcome: "Reliable troubleshooting with clear communication",
     description:
-      "I help people resolve software, hardware, connectivity, and setup issues without making the process feel more complicated than the problem.",
+      "I help individuals and teams resolve software, hardware, connectivity, and setup issues efficiently, reducing downtime and ensuring users can return to work quickly.",
   },
   {
-    title: "Technical documentation",
-    outcome: "Readable reports, guides, and handovers",
+    title: "Technical Documentation & Reporting",
+    outcome: "Well-structured documents that communicate clearly",
     description:
-      "I turn rough ideas, requirements, and project notes into structured documents that are clear enough to use after the work is done.",
+      "I translate complex requirements, rough notes, and project specifications into professional reports, user guides, proposals, and handover documentation that stakeholders can actually use.",
   },
 ];
 
@@ -59,93 +112,93 @@ export const serviceDetails = [
   {
     id: "web",
     label: "Web Systems",
-    title: "Websites, dashboards, and practical web tools",
+    title: "Custom websites, dashboards, and practical web tools",
     description:
-      "For businesses or individuals who need a clean online presence, a booking flow, an admin area, or a custom tool that removes manual work.",
+      "For businesses and organizations that need a professional online presence, streamlined booking workflows, admin dashboards, or internal tools that eliminate manual processes.",
     deliverables: [
-      "Responsive website or web app interface",
-      "Admin dashboard and content/workflow screens",
-      "API connection and database-backed features",
-      "Bug fixing, cleanup, and feature improvements",
+      "Responsive website or web application interface",
+      "Admin dashboard with content and workflow management",
+      "API integration and database-driven features",
+      "Code review, bug fixes, and feature enhancements",
     ],
-    tools: ["React", "JavaScript", "Node.js", "Express", "MongoDB"],
+    tools: ["React", "JavaScript", "Node.js", "Express", "Databases"],
   },
   {
     id: "support",
     label: "IT Support",
-    title: "Technical support for everyday operations",
+    title: "Technical support that keeps operations running smoothly",
     description:
-      "For users and teams that need reliable troubleshooting, setup help, system checks, and clear explanations without unnecessary confusion.",
+      "For teams and users who need prompt, reliable troubleshooting, system setup assistance, and clear explanations, without unnecessary technical jargon.",
     deliverables: [
-      "Software setup and configuration support",
-      "Hardware and connectivity troubleshooting",
-      "User guidance for common technical issues",
-      "Issue documentation and follow-up recommendations",
+      "Software installation, configuration, and updates",
+      "Hardware diagnostics and network connectivity support",
+      "User training and guidance on common technical issues",
+      "Incident documentation and follow-up recommendations",
     ],
-    tools: ["Windows support", "Networking basics", "Hardware checks", "User support"],
+    tools: ["Windows Administration", "Networking Fundamentals", "Hardware Diagnostics", "End-User Support"],
   },
   {
     id: "writing",
     label: "Documentation",
-    title: "Technical documents that are actually readable",
+    title: "Technical documents designed for clarity and usability",
     description:
-      "For students, clients, or teams that need reports, proposals, guides, and project documentation that is structured and easy to present.",
+      "For clients, students, and teams that need polished reports, user guides, project proposals, and system documentation that is easy to read, present, and maintain.",
     deliverables: [
-      "Project reports and technical write-ups",
-      "User guides and process documentation",
-      "Proposal and research document cleanup",
-      "System explanations and handover notes",
+      "Technical reports and research write-ups",
+      "User guides and standard operating procedures",
+      "Project proposals and business documentation",
+      "System architecture explanations and handover notes",
     ],
-    tools: ["Reports", "Guides", "Proposals", "Project documentation"],
+    tools: ["Technical Reports", "User Guides", "Proposals", "Process Documentation"],
   },
 ];
 
 export const credibilityPoints = [
-  "Practical systems, not decoration",
-  "Experience supporting real users",
-  "Clear handovers and documentation",
-  "Responsive work across desktop and mobile",
+  "Results-driven development, not just aesthetics",
+  "Proven experience supporting real users in high-stakes environments",
+  "Clear, professional documentation and knowledge transfer",
+  "Responsive, accessible design across desktop and mobile",
 ];
 
 export const processSteps = [
   {
-    title: "Understand the real problem",
+    title: "Discovery & Problem Definition",
     description:
-      "I clarify who the work is for, what is blocking them, and what the solution needs to do before building anything.",
+      "I begin by understanding the user, the pain points, and the desired outcome. This ensures the solution addresses the actual need, not just the symptoms.",
   },
   {
-    title: "Build the useful version first",
+    title: "Build the Core Solution",
     description:
-      "I focus on the core workflow, clean UI, sensible data flow, and features that match the actual need.",
+      "I focus on delivering a functional, clean, and well-structured product, prioritizing the essential workflow, intuitive interface, and reliable performance.",
   },
   {
-    title: "Make it easy to continue",
+    title: "Deliver & Document",
     description:
-      "I leave clear notes, explanations, and next steps so the project is easier to use, improve, or hand over.",
+      "I provide clear documentation, explain key decisions, and outline next steps so the project can be easily used, maintained, or handed over to another team.",
   },
 ];
 
 export const experience = [
   {
-    role: "IT Support Intern",
+    role: "IT Support Specialist",
     company: "Hospital IT Department",
-    period: "Healthcare support environment",
+    period: "Healthcare IT Environment",
     description:
-      "Helped hospital staff resolve computer, software, connectivity and day-to-day system issues in an environment where reliability matters.",
+      "Provided on-site technical support to clinical and administrative staff in a high-pressure hospital environment. Resolved software, hardware, and network issues promptly, minimizing downtime and ensuring continuity of patient care. Documented incidents and solutions to improve team knowledge and response times.",
   },
   {
     role: "Full-Stack Developer",
-    company: "Independent projects",
-    period: "React, Node.js, Express, MongoDB",
+    company: "Independent Projects & Freelance",
+    period: "React, Node.js, Express, Database Systems",
     description:
-      "Built full-stack project workflows with booking logic, dashboards, database integration, APIs and responsive frontends.",
+      "Designed and built full-stack web applications including booking systems, data dashboards, and admin portals. Integrated RESTful APIs, managed database schemas, and delivered responsive, accessible front-end interfaces tailored to client requirements.",
   },
   {
-    role: "Technical Writer",
-    company: "Freelance documentation",
-    period: "Reports, proposals, guides",
+    role: "Technical Writer & Documentarian",
+    company: "Freelance & Project-Based",
+    period: "Reports, Proposals, User Guides",
     description:
-      "Prepared reports, proposals, project write-ups and technical explanations from rough requirements and scattered notes.",
+      "Developed clear, structured technical documentation from raw requirements and scattered notes. Produced project reports, user guides, proposal documents, and system handover notes that improved knowledge sharing and reduced onboarding time for stakeholders.",
   },
 ];
 
@@ -153,21 +206,21 @@ export const starterProjects = [
   {
     id: "hospital-booking",
     title: "Hospital Appointment Booking & Reminder System",
-    category: "Full-stack healthcare system",
+    category: "Full-Stack Healthcare Application",
     summary:
-      "A patient-facing booking flow and staff dashboard concept for handling appointment requests, reference IDs, rescheduling, and reminder workflows.",
-    role: "Full-stack developer",
+      "A patient-facing booking portal and staff admin dashboard designed to streamline appointment management. Features include reference ID tracking, rescheduling workflows, and SMS reminder integration to reduce no-show rates.",
+    role: "Full-Stack Developer",
     problem:
-      "Patients and staff need a clearer way to book, track, cancel, and reschedule appointments without relying on scattered manual follow-up.",
+      "Patients and staff relied on fragmented manual processes for booking, tracking, and rescheduling appointments, leading to missed appointments and administrative inefficiency.",
     impact:
-      "Shows how appointment records, patient communication, and staff review could live in one cleaner workflow.",
-    tags: ["React", "Node.js", "Express", "MongoDB", "Twilio SMS"],
+      "Demonstrated a unified workflow that centralized appointment management, improved patient communication, and reduced administrative overhead through automation.",
+    tags: ["React", "Node.js", "Express", "Database Systems", "Twilio SMS"],
     features: [
-      "Patient booking with reference IDs",
-      "Admin dashboard for appointment records",
-      "Cancel and reschedule workflow",
-      "SMS reminder integration concept",
-      "Responsive frontend and API-driven backend",
+      "Patient self-service booking with unique reference IDs",
+      "Admin dashboard with full appointment record management",
+      "Cancel and reschedule functionality",
+      "SMS reminder integration for appointment adherence",
+      "Responsive front-end with API-driven back-end architecture",
     ],
     image: "",
     imageUrl: "/projects/booking.png",
@@ -177,31 +230,6 @@ export const starterProjects = [
       "/projects/staff-portal.png",
       "/projects/doctors-portal.png",
     ],
-    liveUrl: "",
-    sourceUrl: "",
-    caseStudyUrl: "",
-  },
-  {
-    id: "documentation-workflow",
-    title: "Technical Documentation Workflow",
-    category: "Writing and documentation",
-    summary:
-      "A documentation workflow for turning rough project notes into proposals, reports, guides, and system handover material.",
-    role: "Technical writer",
-    problem:
-      "Project documents often start as scattered notes, screenshots, and requirements, which makes them difficult to review or reuse.",
-    impact:
-      "Gives clients or teams a cleaner document structure they can present, maintain, and continue using after delivery.",
-    tags: ["Reports", "Guides", "Research", "User documentation"],
-    features: [
-      "Clean document structure",
-      "Requirements broken into readable sections",
-      "Step-by-step explanations",
-      "Professional formatting and review flow",
-    ],
-    image: "",
-    imageUrl: "",
-    galleryImages: [],
     liveUrl: "",
     sourceUrl: "",
     caseStudyUrl: "",

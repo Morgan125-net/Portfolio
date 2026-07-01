@@ -3,7 +3,7 @@ function Process({ processSteps }) {
     <section className="section-shell">
       <div className="section-heading">
         <p className="section-kicker">Working Style</p>
-        <h2>A simple working style that keeps projects moving</h2>
+        <h2>A practical approach that keeps projects on track</h2>
       </div>
 
       <div className="process-grid">

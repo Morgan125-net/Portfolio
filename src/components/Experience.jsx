@@ -3,7 +3,7 @@ function Experience({ experience }) {
     <section id="experience" className="section-shell two-column">
       <div>
         <p className="section-kicker">Experience</p>
-        <h2>Grounded in support work, project builds, and clear writing.</h2>
+        <h2>Experience across IT support, full-stack development, and technical writing.</h2>
       </div>
 
       <div className="timeline">

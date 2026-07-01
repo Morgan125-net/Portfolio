@@ -17,13 +17,13 @@ function Header({ onThemeToggle, theme }) {
         className="theme-toggle"
         type="button"
         onClick={onThemeToggle}
-        aria-label={`Switch to ${theme === "dark" ? "bright" : "dark"} mode`}
+        aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
       >
         <span
-          className={`theme-symbol ${theme === "dark" ? "gear" : "moon"}`}
+          className={`theme-symbol ${theme === "dark" ? "sun" : "moon"}`}
           aria-hidden="true"
         >
-          {theme === "dark" ? "⚙" : "☾"}
+          {theme === "dark" ? "☀️" : "🌙"}
         </span>
       </button>
     </header>
