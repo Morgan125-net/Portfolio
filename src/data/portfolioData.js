@@ -160,24 +160,6 @@ export const credibilityPoints = [
   "Responsive, accessible design across desktop and mobile",
 ];
 
-export const processSteps = [
-  {
-    title: "Discovery & Problem Definition",
-    description:
-      "I begin by understanding the user, the pain points, and the desired outcome. This ensures the solution addresses the actual need, not just the symptoms.",
-  },
-  {
-    title: "Build the Core Solution",
-    description:
-      "I focus on delivering a functional, clean, and well-structured product, prioritizing the essential workflow, intuitive interface, and reliable performance.",
-  },
-  {
-    title: "Deliver & Document",
-    description:
-      "I provide clear documentation, explain key decisions, and outline next steps so the project can be easily used, maintained, or handed over to another team.",
-  },
-];
-
 export const experience = [
   {
     role: "IT Support Specialist",
@@ -227,13 +209,8 @@ export const projects = [
     ],
     image: "",
     imageUrl: "/projects/booking.webp",
-    galleryImages: [
-      "/projects/login.webp",
-      "/projects/admin-portal.webp",
-      "/projects/staff-portal.webp",
-      "/projects/doctors-portal.webp",
-    ],
-    liveUrl: "https://hospital-xzlo.vercel.app", // spotted in your own booking.png screenshot — confirm it still resolves
+    galleryImages: [],
+    liveUrl: "https://hospital-xzlo.vercel.app",
     sourceUrl: "", // TODO: add a link to this project's GitHub repo if it's public
     caseStudyUrl: "",
   },

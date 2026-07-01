@@ -1001,22 +1001,6 @@
   line-height: 1.05;
 }
 
-/* ---------- Process grid ---------- */
-.process-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-}
-
-.process-card {
-  padding: 24px;
-}
-
-.process-card p {
-  color: var(--ink-soft);
-  line-height: 1.72;
-}
-
 /* ---------- Timeline ---------- */
 .timeline {
   display: grid;

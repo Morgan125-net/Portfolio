@@ -5,7 +5,6 @@ import Experience from "./components/Experience";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import Process from "./components/Process";
 import Projects from "./components/Projects";
 import Services from "./components/Services";
 import Skills from "./components/Skills";
@@ -14,7 +13,6 @@ import {
   aboutHighlights,
   credibilityPoints,
   experience,
-  processSteps,
   professionalContext,
   projects,
   serviceDetails,
@@ -53,7 +51,6 @@ function App() {
         services={services}
       />
       <Experience experience={experience} />
-      <Process processSteps={processSteps} />
       <Projects featuredProject={featuredProject} remainingProjects={remainingProjects} />
       <Skills professionalContext={professionalContext} skillGroups={skillGroups} skills={skills} />
       <Contact />
