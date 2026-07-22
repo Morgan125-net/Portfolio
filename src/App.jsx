@@ -1,11 +1,14 @@
 import { useState } from "react";
+import { Analytics } from "@vercel/analytics/react";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Experience from "./components/Experience";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
+import Process from "./components/Process";
 import Projects from "./components/Projects";
+import Reveal from "./components/Reveal";
 import Services from "./components/Services";
 import Skills from "./components/Skills";
 import defaultProfilePhoto from "./assets/profile.png";
@@ -13,6 +16,7 @@ import {
   aboutHighlights,
   credibilityPoints,
   experience,
+  processSteps,
   professionalContext,
   projects,
   serviceDetails,
@@ -41,20 +45,38 @@ function App() {
     <main className="portfolio" data-theme={theme}>
       <Header onThemeToggle={toggleTheme} theme={theme} />
 
-      <Hero credibilityPoints={credibilityPoints} profilePhoto={defaultProfilePhoto} />
-      <About highlights={aboutHighlights} />
-      <Services
-        activeService={activeService}
-        activeServiceId={activeServiceId}
-        onServiceChange={setActiveServiceId}
-        serviceDetails={serviceDetails}
-        services={services}
-      />
-      <Experience experience={experience} />
-      <Projects featuredProject={featuredProject} remainingProjects={remainingProjects} />
-      <Skills professionalContext={professionalContext} skillGroups={skillGroups} skills={skills} />
-      <Contact />
+      <Reveal>
+        <Hero credibilityPoints={credibilityPoints} profilePhoto={defaultProfilePhoto} />
+      </Reveal>
+      <Reveal>
+        <About highlights={aboutHighlights} />
+      </Reveal>
+      <Reveal>
+        <Services
+          activeService={activeService}
+          activeServiceId={activeServiceId}
+          onServiceChange={setActiveServiceId}
+          serviceDetails={serviceDetails}
+          services={services}
+        />
+      </Reveal>
+      <Reveal>
+        <Experience experience={experience} />
+      </Reveal>
+      <Reveal>
+        <Process processSteps={processSteps} />
+      </Reveal>
+      <Reveal>
+        <Projects featuredProject={featuredProject} remainingProjects={remainingProjects} />
+      </Reveal>
+      <Reveal>
+        <Skills professionalContext={professionalContext} skillGroups={skillGroups} skills={skills} />
+      </Reveal>
+      <Reveal>
+        <Contact />
+      </Reveal>
       <Footer />
+      <Analytics />
     </main>
   );
 }

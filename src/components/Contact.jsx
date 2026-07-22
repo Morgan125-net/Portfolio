@@ -1,4 +1,5 @@
 import { CALL_LINK, EMAIL_LINK, WHATSAPP_LINK } from "../data/portfolioData";
+import ContactForm from "./ContactForm";
 
 function Contact() {
   const contactMethods = [
@@ -41,7 +42,9 @@ function Contact() {
       <div className="contact-card">
         <p className="section-kicker">Get in touch</p>
         <h2>Contact me</h2>
-        <p>I'm available for opportunities, collaborations, and consultations. Reach out directly through any of the channels below.</p>
+        <p>I'm available for opportunities, collaborations, and consultations. Send a message directly, or reach out through any of the channels below.</p>
+
+        <ContactForm />
 
         <div className="contact-methods">
           {contactMethods.map((method) => (
