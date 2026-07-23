@@ -1,12 +1,11 @@
 import { useState } from "react";
 
-// TODO: replace with your own Formspree form ID.
 // 1. Create a free account at https://formspree.io
-// 2. Create a new form, point it at murmorgan125@gmail.com
+// 2. Create a new form and point it at murmorgan125@gmail.com
 // 3. Copy the form ID from the endpoint they give you (looks like "xzbqjkwa")
-// 4. Paste it below. Until you do, this form will show an error on submit —
-//    it will not silently fail or send anywhere by default.
-const FORMSPREE_FORM_ID = "YOUR_FORM_ID";
+// 4. Create a .env file with VITE_FORMSPREE_FORM_ID=<your form ID>
+//    and restart the Vite development server.
+const FORMSPREE_FORM_ID = import.meta.env.VITE_FORMSPREE_FORM_ID || "";
 
 const STATUS = {
   idle: "idle",
