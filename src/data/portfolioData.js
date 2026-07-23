@@ -3,23 +3,7 @@
   theme: "morgan.theme",
 };
 
-export const EMAIL_LINK = "mailto:murmorgan125@gmail.com";
-export const CALL_LINK = "tel:+254794589612";
-export const WHATSAPP_LINK = "https://wa.me/254794589612";
 export const REQUEST_CV_LINK = "mailto:murmorgan125@gmail.com?subject=CV%20request";
-
-export const socialLinks = [
-  {
-    label: "Email",
-    shortLabel: "EM",
-    href: EMAIL_LINK,
-  },
-  {
-    label: "WhatsApp",
-    shortLabel: "WA",
-    href: WHATSAPP_LINK,
-  },
-];
 
 export const skills = [
   "React.js & Front-End Development",
